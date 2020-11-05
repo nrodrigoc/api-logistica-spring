@@ -1,0 +1,15 @@
+# Server
+server:
+  port: 80
+
+# Banco de dados
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/logisticadb
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
