@@ -7,6 +7,8 @@ import com.nrodrigoc.logisticsapp.service.impl.CaminhoneiroServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/v1/api/caminhoneiro")
 public class CaminhoneiroController {
@@ -16,7 +18,7 @@ public class CaminhoneiroController {
 
 
     @PostMapping
-    public Caminhoneiro salvar(@RequestBody Caminhoneiro caminhoneiro) {
+    public Caminhoneiro salvar(@RequestBody @Valid Caminhoneiro caminhoneiro) {
         return caminhoneiroService.salvar(caminhoneiro);
     }
 
@@ -26,7 +28,7 @@ public class CaminhoneiroController {
     }
 
     @PostMapping("/frete")
-    public InformacoesFreteDTO addFrete(@RequestBody FreteDTO frete){
+    public InformacoesFreteDTO addFrete(@RequestBody @Valid FreteDTO frete){
         return caminhoneiroService.addFrete(frete);
     }
 

@@ -3,6 +3,7 @@ package com.nrodrigoc.logisticsapp.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity(name = "TB_CAMINHONEIRO")
 @Getter@Setter
@@ -16,6 +17,7 @@ public class Caminhoneiro {
     private Integer id;
 
     @Column(length = 100)
+    @NotEmpty(message = "O campo nome é obrigatório.")
     private String nome;
 
     @OneToOne

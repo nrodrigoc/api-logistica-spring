@@ -1,4 +1,4 @@
-package com.nrodrigoc.logisticsapp.enums;
+package com.nrodrigoc.logisticsapp.model.enums;
 
 public enum StatusPedido {
 

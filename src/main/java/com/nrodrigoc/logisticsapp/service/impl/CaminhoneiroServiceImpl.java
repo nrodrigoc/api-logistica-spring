@@ -1,6 +1,6 @@
 package com.nrodrigoc.logisticsapp.service.impl;
 
-import com.nrodrigoc.logisticsapp.enums.StatusPedido;
+import com.nrodrigoc.logisticsapp.model.enums.StatusPedido;
 import com.nrodrigoc.logisticsapp.exception.FreteNaoEncontradoException;
 import com.nrodrigoc.logisticsapp.exception.RegraNegocioException;
 import com.nrodrigoc.logisticsapp.rest.dto.FreteDTO;
@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
+import javax.validation.Valid;
 import java.util.Set;
 import java.util.stream.Collectors;
 

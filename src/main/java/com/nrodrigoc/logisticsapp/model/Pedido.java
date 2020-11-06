@@ -1,6 +1,6 @@
 package com.nrodrigoc.logisticsapp.model;
 
-import com.nrodrigoc.logisticsapp.enums.StatusPedido;
+import com.nrodrigoc.logisticsapp.model.enums.StatusPedido;
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,6 +1,6 @@
 package com.nrodrigoc.logisticsapp.service.impl;
 
-import com.nrodrigoc.logisticsapp.enums.StatusPedido;
+import com.nrodrigoc.logisticsapp.model.enums.StatusPedido;
 import com.nrodrigoc.logisticsapp.exception.ClienteNaoEncontradoException;
 import com.nrodrigoc.logisticsapp.exception.PedidoNaoEncontradoException;
 import com.nrodrigoc.logisticsapp.exception.ProdutoNaoEncontradoException;

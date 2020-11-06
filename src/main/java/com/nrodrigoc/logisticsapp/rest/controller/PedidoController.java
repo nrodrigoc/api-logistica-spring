@@ -7,6 +7,8 @@ import com.nrodrigoc.logisticsapp.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/v1/api/pedidos")
 public class PedidoController {
@@ -15,7 +17,7 @@ public class PedidoController {
     private PedidoService pedidoService;
 
     @PostMapping
-    public InformacoesPedidoDTO salvar(@RequestBody PedidoDTO dto){
+    public InformacoesPedidoDTO salvar(@RequestBody @Valid PedidoDTO dto){
         return pedidoService.salvar(dto);
     }
 

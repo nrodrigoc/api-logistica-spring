@@ -6,6 +6,8 @@ import com.nrodrigoc.logisticsapp.service.impl.ProdutoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/v1/api/produtos")
 public class ProdutoController {
@@ -13,8 +15,8 @@ public class ProdutoController {
     @Autowired
     private ProdutoServiceImpl produtoService;
 
-    @PostMapping("/add")
-    public Produto salvar(@RequestBody Produto produto){
+    @PostMapping
+    public Produto salvar(@RequestBody @Valid Produto produto){
         return produtoService.salvar(produto);
     }
 
