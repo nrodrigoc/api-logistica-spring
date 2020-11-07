@@ -13,3 +13,15 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  mail:
+    host: smtp.office365.com
+    port: 587
+    username: teu_mail@hotmail.com
+    password: tua_senha
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+        default-encoding: UTF-8

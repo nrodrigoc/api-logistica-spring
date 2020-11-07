@@ -1,5 +1,6 @@
 package com.nrodrigoc.logisticsapp.rest.controller;
 
+import com.nrodrigoc.logisticsapp.email.MailServiceImpl;
 import com.nrodrigoc.logisticsapp.model.Caminhoneiro;
 import com.nrodrigoc.logisticsapp.rest.dto.FreteDTO;
 import com.nrodrigoc.logisticsapp.rest.dto.InformacoesFreteDTO;
@@ -14,11 +15,18 @@ import javax.validation.Valid;
 public class CaminhoneiroController {
 
     @Autowired
-    CaminhoneiroServiceImpl caminhoneiroService;
+    private CaminhoneiroServiceImpl caminhoneiroService;
 
+    @Autowired
+    private MailServiceImpl mailService;
 
     @PostMapping
     public Caminhoneiro salvar(@RequestBody @Valid Caminhoneiro caminhoneiro) {
+        mailService.sendSimpleMail(
+                "nathanrodrigo@cc.ci.ufpb.br",
+                "Caminhoneiro Registrado",
+                "O caminhoneiro de nome " + caminhoneiro.getNome() + " foi registrado com sucesso!"
+                );
         return caminhoneiroService.salvar(caminhoneiro);
     }
 

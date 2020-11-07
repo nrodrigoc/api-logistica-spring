@@ -24,7 +24,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
     // https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
-    compile group: 'org.hibernate', name: 'hibernate-validator', version: '6.1.0.Final'
+    implementation 'org.hibernate:hibernate-validator:6.1.0.Final'
+    // https://mvnrepository.com/artifact/org.springframework/spring-context-support
+    implementation 'org.springframework:spring-context-support:5.2.10.RELEASE'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'javax.validation:validation-api'
     compileOnly 'org.projectlombok:lombok'

@@ -16,6 +16,7 @@ import java.util.Set;
 public class Cliente {
 
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "cliente_seq")
     private Integer id;
 
@@ -31,7 +32,6 @@ public class Cliente {
     @NotEmpty(message = "{cliente.login.obrigatorio}")
     private String login;
 
-    @JsonIgnore
     @Column(length = 100)
     @NotEmpty(message = "{cliente.senha.obrigatorio}")
     private String senha;
