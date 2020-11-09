@@ -16,8 +16,8 @@ spring:
   mail:
     host: smtp.office365.com
     port: 587
-    username: tonyhawks16@hotmail.com
-    password: cavalcante1
+    username: your-email@hotmail.com
+    password: your-password
     properties:
       mail:
         smtp:
@@ -29,7 +29,7 @@ spring:
     active: usage_message
 
 
-## RabbitMQ configs
+## RabbitMQ configs ##
 mq:
   host: localhost
   username: guest
