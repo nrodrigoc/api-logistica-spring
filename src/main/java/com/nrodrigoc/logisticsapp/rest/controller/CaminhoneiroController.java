@@ -2,6 +2,7 @@ package com.nrodrigoc.logisticsapp.rest.controller;
 
 import com.nrodrigoc.logisticsapp.email.MailServiceImpl;
 import com.nrodrigoc.logisticsapp.model.Caminhoneiro;
+import com.nrodrigoc.logisticsapp.rest.dto.EmailDTO;
 import com.nrodrigoc.logisticsapp.rest.dto.FreteDTO;
 import com.nrodrigoc.logisticsapp.rest.dto.InformacoesFreteDTO;
 import com.nrodrigoc.logisticsapp.service.impl.CaminhoneiroServiceImpl;
@@ -22,11 +23,12 @@ public class CaminhoneiroController {
 
     @PostMapping
     public Caminhoneiro salvar(@RequestBody @Valid Caminhoneiro caminhoneiro) {
-        mailService.sendSimpleMail(
-                "nathanrodrigo@cc.ci.ufpb.br",
-                "Caminhoneiro Registrado",
-                "O caminhoneiro de nome " + caminhoneiro.getNome() + " foi registrado com sucesso!"
-                );
+        mailService.publishMessage(EmailDTO.builder()
+                .to("nathanrodrigo70@gmail.com")
+                .subject("Caminhoneiro Registrado!")
+                .content("O caminhoneiro " + caminhoneiro.getNome() + " foi registrado com sucesso!")
+                .build()
+        );
         return caminhoneiroService.salvar(caminhoneiro);
     }
 

@@ -29,6 +29,10 @@ dependencies {
     implementation 'org.springframework:spring-context-support:5.2.10.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
     implementation 'org.springframework.boot:spring-boot-starter-mail'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'javax.validation:validation-api'
     compileOnly 'org.projectlombok:lombok'
