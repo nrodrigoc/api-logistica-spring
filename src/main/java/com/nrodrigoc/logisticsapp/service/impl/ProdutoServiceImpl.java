@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class ProdutoServiceImpl implements ProdutoService {
@@ -20,6 +21,11 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Transactional
     public Produto salvar(Produto produto) {
         return produtoRepository.save(produto);
+    }
+
+    @Override
+    public List<Produto> getProdutos() {
+        return produtoRepository.findAll();
     }
 
     public Produto getById(Integer id) {

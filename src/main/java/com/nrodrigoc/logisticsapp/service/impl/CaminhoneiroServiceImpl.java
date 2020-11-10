@@ -1,8 +1,11 @@
 package com.nrodrigoc.logisticsapp.service.impl;
 
+import com.nrodrigoc.logisticsapp.email.MailServiceImpl;
+import com.nrodrigoc.logisticsapp.model.Cliente;
 import com.nrodrigoc.logisticsapp.model.enums.StatusPedido;
 import com.nrodrigoc.logisticsapp.exception.FreteNaoEncontradoException;
 import com.nrodrigoc.logisticsapp.exception.RegraNegocioException;
+import com.nrodrigoc.logisticsapp.rest.dto.EmailDTO;
 import com.nrodrigoc.logisticsapp.rest.dto.FreteDTO;
 import com.nrodrigoc.logisticsapp.exception.CaminhoneiroNaoEncontradoException;
 import com.nrodrigoc.logisticsapp.exception.PedidoNaoEncontradoException;
@@ -18,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,7 +28,7 @@ import java.util.stream.Collectors;
 public class CaminhoneiroServiceImpl implements CaminhoneiroService {
 
     @Autowired
-    private CaminhoneiroRepository caminhoneiroRep;
+    private CaminhoneiroRepository caminhoneiroRepository;
 
     @Autowired
     private FreteRepository freteRepository;
@@ -34,13 +36,20 @@ public class CaminhoneiroServiceImpl implements CaminhoneiroService {
     @Autowired
     private PedidoRepository pedidoRepository;
 
+    @Autowired
+    private MailServiceImpl mailService;
+
     @Override
     @Transactional
     public Caminhoneiro salvar(Caminhoneiro caminhoneiro) {
-//        Frete frete = freteRepository.findById(dto.getFrete())
-//                .orElseThrow(() -> new FreteNaoEncontradoException(dto.getFrete()));
+        mailService.publishMessage(EmailDTO.builder()
+                .to("nathanrodrigo70@gmail.com")
+                .subject("Caminhoneiro Registrado!")
+                .content("O caminhoneiro " + caminhoneiro.getNome() + " foi registrado com sucesso!")
+                .build()
+        );
 
-        return caminhoneiroRep.save(caminhoneiro);
+        return caminhoneiroRepository.save(caminhoneiro);
     }
 
     @Override
@@ -49,7 +58,7 @@ public class CaminhoneiroServiceImpl implements CaminhoneiroService {
         Frete frete = new Frete();
 
         //Encontra o caminhoneiro
-        Caminhoneiro caminhoneiro = caminhoneiroRep.findById(dto.getIdCaminhoneiro())
+        Caminhoneiro caminhoneiro = caminhoneiroRepository.findById(dto.getIdCaminhoneiro())
                 .orElseThrow(() -> new CaminhoneiroNaoEncontradoException(dto.getIdCaminhoneiro()));
 
         if (caminhoneiro.getFrete() != null) {
@@ -86,7 +95,7 @@ public class CaminhoneiroServiceImpl implements CaminhoneiroService {
         caminhoneiro.setFrete(frete);
 
         //Atualiza o caminhoneiro
-        caminhoneiroRep.save(caminhoneiro);
+        caminhoneiroRepository.save(caminhoneiro);
 
         return InformacoesFreteDTO.builder()
                 .numero_frete(frete.getId())
@@ -98,7 +107,7 @@ public class CaminhoneiroServiceImpl implements CaminhoneiroService {
 
     @Override
     public Caminhoneiro getById(Integer id) {
-        return caminhoneiroRep.findById(id)
+        return caminhoneiroRepository.findById(id)
                 .orElseThrow(() -> new CaminhoneiroNaoEncontradoException(id));
     }
 
@@ -115,5 +124,38 @@ public class CaminhoneiroServiceImpl implements CaminhoneiroService {
                 .destino(frete.getDestino())
                 .nome_caminhoneiro(frete.getCaminhoneiro().getNome())
                 .build();
+    }
+
+    @Override
+    public void entregaFrete(Integer idFrete) {
+        Frete frete = freteRepository.findById(idFrete)
+                .orElseThrow(() -> new CaminhoneiroNaoEncontradoException(idFrete));
+
+        Caminhoneiro caminhoneiro = frete.getCaminhoneiro();
+
+        //Muda o status dos pedidos do frete para "entregue"
+        Set<Pedido> pedidos = frete.getPedidos().stream()
+                .map(pedido -> {
+                    Cliente cliente = pedido.getCliente();
+                    pedido.setStatus(StatusPedido.ENTREGUE);
+
+                    //Envia email pro cliente avisando que o pedido foi entregue
+                    mailService.publishMessage(
+                            EmailDTO.builder()
+                            .to(cliente.getEmail())
+                            .subject("Pedido de código " + pedido.getId())
+                            .content("Sr(a). " + cliente.getNome() + ", o seu pedido de código "
+                                    + pedido.getId() + " foi entregue com sucesso!")
+                            .build()
+                    );
+
+                    return pedidoRepository.save(pedido);
+                }).collect(Collectors.toSet());
+        pedidoRepository.saveAll(pedidos);
+
+        //Retira o frete do caminhoneiro para que ele possa receber outro
+        caminhoneiro.setFrete(null);
+        caminhoneiroRepository.save(caminhoneiro);
+
     }
 }

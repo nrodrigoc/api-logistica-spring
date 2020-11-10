@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/api/produtos")
@@ -20,9 +21,15 @@ public class ProdutoController {
         return produtoService.salvar(produto);
     }
 
-    @GetMapping
-    public Produto getById(@RequestParam Integer id){
+    @GetMapping("/{id}")
+    public Produto getById(@PathVariable Integer id){
         return produtoService.getById(id);
     }
+
+    @GetMapping
+    public List<Produto> getAll(){
+        return produtoService.getProdutos();
+    }
+
 
 }

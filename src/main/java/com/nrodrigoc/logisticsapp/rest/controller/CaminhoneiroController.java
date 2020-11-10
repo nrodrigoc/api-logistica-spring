@@ -18,17 +18,8 @@ public class CaminhoneiroController {
     @Autowired
     private CaminhoneiroServiceImpl caminhoneiroService;
 
-    @Autowired
-    private MailServiceImpl mailService;
-
     @PostMapping
     public Caminhoneiro salvar(@RequestBody @Valid Caminhoneiro caminhoneiro) {
-        mailService.publishMessage(EmailDTO.builder()
-                .to("nathanrodrigo70@gmail.com")
-                .subject("Caminhoneiro Registrado!")
-                .content("O caminhoneiro " + caminhoneiro.getNome() + " foi registrado com sucesso!")
-                .build()
-        );
         return caminhoneiroService.salvar(caminhoneiro);
     }
 
@@ -45,6 +36,11 @@ public class CaminhoneiroController {
     @GetMapping("/frete/{id}")
     public InformacoesFreteDTO getFrete(@PathVariable("id") Integer id) {
         return caminhoneiroService.getFrete(id);
+    }
+
+    @PostMapping("/frete/{id}")
+    private void entregaFrete(@PathVariable("id") Integer id){
+        caminhoneiroService.entregaFrete(id);
     }
 
 }

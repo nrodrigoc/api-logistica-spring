@@ -9,13 +9,14 @@ import javax.validation.Valid;
 
 public interface CaminhoneiroService {
 
-    public Caminhoneiro salvar (Caminhoneiro caminhoneiro);
+    public Caminhoneiro salvar( Caminhoneiro caminhoneiro );
 
-    public InformacoesFreteDTO addFrete(FreteDTO frete);
+    public InformacoesFreteDTO addFrete( FreteDTO frete );
 
     public Caminhoneiro getById(Integer id);
 
     public InformacoesFreteDTO getFrete(Integer idFrete);
 //    Optional
+    public void entregaFrete(Integer idCaminhoneiro);
 
 }
