@@ -9,4 +9,6 @@ public interface CaminhoneiroFreteRepository extends JpaRepository<CaminhoneiroF
 
     CaminhoneiroFrete findOneByCaminhoneiroId(Integer id_caminhoneiro);
 
+    CaminhoneiroFrete findOneByFreteId(Integer id_frete);
+
 }

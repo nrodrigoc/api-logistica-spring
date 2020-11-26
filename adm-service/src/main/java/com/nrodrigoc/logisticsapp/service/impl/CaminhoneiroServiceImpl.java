@@ -169,6 +169,10 @@ public class CaminhoneiroServiceImpl implements CaminhoneiroService {
 //
 //        Caminhoneiro caminhoneiro = frete.getCaminhoneiro();
 //
+
+        CaminhoneiroFrete caminhoneiroFrete = caminhoneiroFreteRepository
+                .findOneByFreteId(idFrete);
+
         //Muda o status dos pedidos do frete para "entregue"
         Set<Pedido> pedidos = pedidoRepository.findByFrete(frete).stream()
                 .map(pedido -> {
@@ -188,6 +192,10 @@ public class CaminhoneiroServiceImpl implements CaminhoneiroService {
                     return pedidoRepository.save(pedido);
                 }).collect(Collectors.toSet());
         pedidoRepository.saveAll(pedidos);
+
+        // Libera o caminhoneiro para receber outro frete
+        caminhoneiroFrete.setFreteId(-1);
+        caminhoneiroFreteRepository.save(caminhoneiroFrete);
 //
 //        //Retira o frete do caminhoneiro para que ele possa receber outro
 //        caminhoneiro.setFrete(null);
