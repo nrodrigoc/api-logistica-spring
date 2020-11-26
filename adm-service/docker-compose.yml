@@ -1,0 +1,40 @@
+version: "3.7"
+services:
+
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres-container
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: postgres
+      POSTGRES_DB: logisticadb
+    volumes:
+      - /api/db/data:/var/lib/postgresql
+    ports:
+      - 5432:5432
+
+  rabbitmq:
+      image: rabbitmq:3-management
+      container_name: rabbitmq-container
+      restart: always
+      environment:
+        RABBITMQ_DAFAULT_USER: guest
+        RABBITMQ_DEFAULT_PASS: guest
+      ports:
+        - 5672:5672
+        - 15672:15672
+      depends_on:
+        - postgres-db
+#  app:
+#      build:
+#        "/api"
+#      container_name: spring-container
+#      volumes:
+#      - /api:/home/spring/app
+#      ports:
+#      - "80:80"
+#      depends_on:
+#        - postgres-db
+#        - rabbitmq
+

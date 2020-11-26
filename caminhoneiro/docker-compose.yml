@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+
+  db:
+    image: postgres:latest
+    container_name: adm-container
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: administracaodb
+    volumes:
+      - /api/db/data:/var/lib/postgresql
+    ports:
+      - 5431:5431
+    command: -p 5431
