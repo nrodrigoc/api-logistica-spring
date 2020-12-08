@@ -10,7 +10,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/api/produtos")
+@RequestMapping("/v1/geral/api/produtos")
 public class ProdutoController {
 
     @Autowired
