@@ -5,6 +5,8 @@ API para gerenciamento de empresa de logística para fins de aprendizado
 <ul>
   <li><a href="https://spring.io/projects/spring-boot">Spring Boot</a></li>
   <li><a href="https://spring.io/projects/spring-data-jpa">Spring JPA</a></li>
+  <li><a href="https://spring.io/projects/spring-cloud-gateway">Spring Cloud Gateway</a></li>
+  <li><a href="https://spring.io/projects/spring-cloud-netflix">Netflix Eureka</a></li>
   <li><a href="https://www.rabbitmq.com/">RabbitMQ</a></li>
   <li><a href="https://projectlombok.org/">Lombok</a></li>
   <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
