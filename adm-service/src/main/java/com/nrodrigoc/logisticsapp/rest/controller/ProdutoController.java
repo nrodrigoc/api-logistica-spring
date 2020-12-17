@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/v1/geral/api/produtos")
 public class ProdutoController {
@@ -22,6 +23,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/{id}")
+//    @CrossOrigin("http://192.168.0.102:3000")
     public Produto getById(@PathVariable Integer id){
         return produtoService.getById(id);
     }

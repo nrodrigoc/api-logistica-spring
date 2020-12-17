@@ -1,6 +1,17 @@
 spring:
   application:
     name: gateway-service
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+
 
 eureka:
   client:
