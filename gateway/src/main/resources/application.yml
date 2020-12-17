@@ -7,10 +7,8 @@ spring:
         cors-configurations:
           '[/**]':
             allowedOrigins: "*"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
+            allowedMethods: "*"
+            allowedHeaders: "*"
 
 
 eureka:
