@@ -1,6 +1,10 @@
 server:
   port: 1245
 
+eureka:
+  client:
+    fetch-registry: true
+
 spring:
   application:
     name: caminhoneiro-service

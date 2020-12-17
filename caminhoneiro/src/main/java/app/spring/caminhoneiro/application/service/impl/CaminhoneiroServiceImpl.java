@@ -95,8 +95,14 @@ public class CaminhoneiroServiceImpl implements CaminhoneiroService {
     }
 
     @Override
+    @Transactional
     public CaminhoneiroDTO getById(Integer id) {
-        return null;
+        Caminhoneiro caminhoneiro = caminhoneiroRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return CaminhoneiroDTO.builder()
+                .nome(caminhoneiro.getNome())
+                .frete(caminhoneiro.getFrete() != null ? caminhoneiro.getFrete().getId() : -1)
+                .build();
     }
 
     @Override
@@ -120,8 +126,6 @@ public class CaminhoneiroServiceImpl implements CaminhoneiroService {
         logger.info("Message published!");
 
         caminhoneiro.setFrete(null);
-
-
 
     }
 

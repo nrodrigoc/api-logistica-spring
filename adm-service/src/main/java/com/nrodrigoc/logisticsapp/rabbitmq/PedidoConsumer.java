@@ -1,10 +1,7 @@
 package com.nrodrigoc.logisticsapp.rabbitmq;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nrodrigoc.logisticsapp.rest.dto.AddFreteDTO;
-import com.nrodrigoc.logisticsapp.service.CaminhoneiroService;
-import com.nrodrigoc.logisticsapp.service.PedidoService;
+import com.nrodrigoc.logisticsapp.service.CaminhoneiroFreteService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class PedidoConsumer {
 
     @Autowired
-    private CaminhoneiroService caminhoneiroService;
+    private CaminhoneiroFreteService caminhoneiroFreteService;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -21,7 +18,7 @@ public class PedidoConsumer {
     @RabbitListener(queues = {"pedido-queue"}, concurrency = "1")
     public void receivedMessage(Integer id_frete) {
 
-        caminhoneiroService.entregaFrete(id_frete);
+        caminhoneiroFreteService.entregaFrete(id_frete);
 
     }
 

@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@FeignClient(url = "http://localhost:80/v1/api/caminhoneiro", name = "caminhoneiro-service")
+@FeignClient(url = "http://localhost:8182/v1/geral/api/caminhoneiro", name = "app-logistica")
 public interface CaminhoneiroClient {
 
     @PostMapping("/{id}/")

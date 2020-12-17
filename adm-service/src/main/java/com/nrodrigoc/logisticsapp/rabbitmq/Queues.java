@@ -13,7 +13,7 @@ public class Queues {
     }
 
     @Bean
-    public Queue caminhoneiroQueue() { return new Queue("frete-queue", true); }
+    public Queue freteQueue() { return new Queue("frete-queue", true); }
 
     @Bean
     public Queue pedidoQueue() { return new Queue("pedido-queue", true); }
